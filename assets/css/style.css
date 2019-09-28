@@ -1,0 +1,7 @@
+.background {
+  background-image: url(../../assets/refrigerator.jpg);
+  background-position: center;
+  width: 375px;
+  height: 812px;
+  margin: 0 auto;
+}
