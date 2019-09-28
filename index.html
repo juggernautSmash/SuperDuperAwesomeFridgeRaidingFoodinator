@@ -13,38 +13,76 @@
 </head>
 
 <body>
-  <div class= 'background'>
+  <div class='background'>
+    <div class='fade'>
+      <!-- Navbar goes here -->
+      <div>
+        <nav>
+          <div class="nav-wrapper blue-grey darken-4">
+            <a href="#" class="brand-logo center">SDAFRF</a>
+            <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down ">
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="settings.html">Settings</a></li>
+              <li><a href="recipes.html">Recipes</a></li>
+              <li><a href="login.html">Sign Out</a></li>
+            </ul>
+            <!-- Navigation for mobile menu-->
+            <ul class="sidenav blue-grey" id="mobile-menu">
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="settings.html">Settings</a></li>
+              <li><a href="recipes.html">Recipes</a></li>
+              <li><a href="login.html">Sign Out</a></li>
+            </ul>
+            <form>
+              <div class="input-field left">
+                <input id="search" type="search" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </div>
+        </nav>
+      </div>
+      <!-- ================ -->
+      <br><br><br>
+      <!-- Page text content -->
+      <div class='row'>
+        <br>
+        <div class="col s12 center">Super Duper Awesome Fridge Raiding Foodinator</div>
+        <br><br><br><br>
+        <div class="col s12 center">a bunch of words explaining what the app does and stuff</div>
+        <br><br><br><br>
+        <!-- ================ -->
 
-    <!-- Navbar goes here -->
-    <div></div>
-    <!-- ================ -->
-    
-    <!-- Page text content -->
-    <div class='row'>
-      <br>
-      <div class="col s12 center">Super Duper Awesome Fridge Raiding Foodinator</div>
-      <br><br><br><br>
-      <div class="col s12 center">a bunch of words explaining what the app does and stuff</div>
-      <br><br><br><br>
-    <!-- ================ -->
+        <!-- Firebase Auth Info -->
+        <div id="firebaseui-auth-container"></div>
 
-    <!-- Firebase Auth Info -->
-      <div id="firebaseui-auth-container"></div>
-      
-      <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
-      <script src="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.js"></script>
-    <!-- ================== -->
+        <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.js"></script>
+        <!-- ================== -->
+
+      </div>
+
+      <!-- Footer stuff goes here -->
+      <div></div>
 
     </div>
-    
-    <!-- Footer stuff goes here -->
-    <div></div>
   </div>
-    
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    //Initialize nav bar
+    document.addEventListener('DOMContentLoaded', function () {
+      const elems = document.querySelectorAll('.sidenav');
+      const instances = M.Sidenav.init(elems, { edge: 'right' });
+    });
+
+  </script>
+
   <script type="text/javascript">
     const config = {
       apiKey: "AIzaSyDxWJeuXwLgYqK6e2nrtf7mvD7j_pOBbvA",
