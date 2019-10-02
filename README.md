@@ -17,3 +17,6 @@ Project #1  for Bootcamp Spot. This is an app that fetches recipes based on user
         -- sample page for inputting ingredients
         -- sample page for fetching recipes
         -- sample page for generating recipe cards based on selected ingredients
+
+[JE][10/01/2019] - adding profile.html page
+
