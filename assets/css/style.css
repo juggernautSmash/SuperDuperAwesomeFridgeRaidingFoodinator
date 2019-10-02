@@ -1,0 +1,17 @@
+.fade {
+  background-color: black;
+  height: 812px;
+  top: 0px;
+  margin: 0 auto;
+  opacity: 0.85;
+  color: white;
+}
+
+.background {
+  background-image: url(../../assets/images/refrigerator.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 812px; 
+  margin: 0 auto;
+  /* opacity: 0.6; */
+}
