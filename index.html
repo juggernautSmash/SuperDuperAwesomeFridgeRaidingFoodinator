@@ -5,11 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.css" />
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>SuperDuperAwesomeFridgeRaidingFoodinator</title>
+  <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
+  <!-- Compiled and minified CSS for Materialize -->
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Firbase CDNs-->
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.css">
+  <!--Import Google Icon Font-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
@@ -58,22 +61,22 @@
         <!-- Firebase Auth Info -->
         <div id="firebaseui-auth-container"></div>
 
-        <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
-        <script src="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.js"></script>
         <!-- ================== -->
 
       </div>
 
       <!-- Footer stuff goes here -->
       <div></div>
-
     </div>
   </div>
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.js"></script>
+  <!-- JS for fetching recipes-->
+  <script src="./assets/js/fetchRecipes.js"></script>
   <script>
     //Initialize nav bar
     document.addEventListener('DOMContentLoaded', function () {
@@ -81,6 +84,7 @@
       const instances = M.Sidenav.init(elems, { edge: 'right' });
     });
 
+<<<<<<< HEAD
   </script>
 
   <script type="text/javascript">
@@ -94,6 +98,19 @@
       appId: "1:1079646422636:web:73b3bec708ef08768f7a49"
     }
 
+=======
+    // Firebase stuff
+    let config = {
+      apiKey: 'AIzaSyC0N5n6Wa6j4I_UX0DJ2Td1aymh7l2UVq8',
+      authDomain: 'sdafrf-442fb.firebaseapp.com',
+      databaseURL: 'https://sdafrf-442fb.firebaseio.com',
+      projectId: 'sdafrf-442fb',
+      storageBucket: '',
+      messagingSenderId: '1079646422636',
+      appId: '1:1079646422636:web:73b3bec708ef08768f7a49'
+    };
+    // Initialize Firebase
+>>>>>>> af68f8827507529c9b32482a6563cfdf889e2465
     firebase.initializeApp(config)
 
     // FirebaseUI config.
@@ -109,7 +126,6 @@
     // The start method will wait until the DOM is loaded.
     ui.start('#firebaseui-auth-container', uiConfig);
   </script>
-
 </body>
 
 </html>
