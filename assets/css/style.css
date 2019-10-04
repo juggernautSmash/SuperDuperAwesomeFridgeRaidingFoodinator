@@ -15,3 +15,52 @@
   margin: 0 auto;
   /* opacity: 0.6; */
 }
+
+/* Save button */
+.saveRecipe {
+  position: absolute;
+}
+
+/*for allResults tab*/
+#allResults {
+  color: #cfd8dc;
+}
+
+/*for yesMake tab*/
+#yesMake {
+  color: #cfd8dc;
+}
+
+/*for the noMake tab*/
+#noMake {
+  color: #cfd8dc;
+}
+
+/* Override materialise settings section*/
+.tabs {
+  background-color: #263238
+}
+
+.tab {
+  color: #cfd8dc;
+}
+
+.tabs .tab a:hover {
+  background-color: #78909c;
+  color: #455a64;
+}
+
+.tabs .tab a.active{
+  background-color: #78909c;
+}
+
+.tabs .indicator {
+  background: rgb(155, 0, 0);
+}
+
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+  background-color: #90a4ae;
+  outline: none;
+}
+
+/*end override materialise settings section*/
