@@ -1,66 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
- 
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
- <link rel="stylesheet" href="C:\Users\Jawed\Documents\SuperDuperAwesomeFridgeRaidingFoodinator\signUp.css">
-
-
-
+  <meta charset='UTF-8'>
+  <meta name='viewport' content=''>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+  <link rel="stylesheet" href="C:\Users\Jawed\Documents\SuperDuperAwesomeFridgeRaidingFoodinator\profile.css">
+ <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+ <!-- <link rel='stylesheet' href='C:\Users\Jawed\Documents\SuperDuperAwesomeFridgeRaidingFoodinator\signUp.css'> -->
 </head>
-<body>
 
-<div class="container">
-    <div class="card" style="width: 18rem;">
-        <img src="https://www.brandchannel.com/wp-content/uploads/2018/03/jennair-new-fridge-2018-1280-1024x790.jpg" class="card-img-top" alt=""> 
-                <label class="header"></label>
-                <input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+<body>
+<div class='container'>
+  <div class='row'>
+    <div class="card col s12">
+      <div class="card-content">
+        <h1 class="card-title">Personal Info</h1>
+        <p class=''>Name here : <span id="name"></span></p>
+        <p class=''>Email : <span id="email"></span></p>
+      </div>
     </div>
-       
-        <div class="profile-pic">
-          <h5 class="Name">Name here :</h5>
-        </div>
-            <ul class="info">
-                <li class="email">email : jdoe@email.com</li>
-                <li class="favorite-foods">favorite food : Pasta</li>
-                <li class="allergies">allergies : None</li>
-                
-                    <p>
-                            <a href="#" class="log-out">
-                            <span class="glyphicon glyphicon-log-out"></span> Log out
-                            </a>
-                    </p>
-                
-            </ul>
+  </div>
+         
+  <div class='row'>
+      <div class="card col s12">
+          <div class="card-content">
+            <h1 class="card-title">My Food</h1>
+              <div id="addFood" class="row">
+               <form><!-- Input food items-->
+                  <div class="row">
+                      <div class="input-field col s6">
+                          <input placeholder="Enter ingredients" id="foodItem" type="text" class="validate">
+                          <!-- <label for="foodItem">Food Ingredient</label> -->
+                          <button id="addItem" class="waves-effect waves-red blue-grey darken btn">Add</button>
+                      </div>
+                              <div id="ingredients"><!-- Display inputted foods with check box-->
+                                <forms id="ingredientsList"></forms>
+                                
+                              </div>
+                  </div>
+              </form>
+             </div>
+
+          </div>
+      </div>
+  </div>
         
-    
+  <div class='row'>
+      <div class="card col s12">
+          <div class="card-content">
+            <h1 class="card-title">My Recipes</h1>
+            <div id="addFood" class="row">
+                <div id="myRecipes"><!-- Display inputted foods with check box-->
+                  
+               </div>
+          </div>
+      </div>
+  </div>     
 </div> 
 
-<div class="container">
-    <div class="box">
-        <div class="infoUpdate">
-            <h5 class="updateName">Update information below :</h5>
-        </div>
-           <div class="row">
-                <form action="/action_page.php">
-                    new email: <input type="text" name="FirstName" value=""><br>
-                    new favorite foods: <input type="text" name="LastName" value=""><br>
-                    new allergies: <input type="text" name="FirstName" value=""><br>
-                    new password: <input type="text" name="FirstName" value=""><br>
-                    <input type="submit" value="Submit">
-                </form>
-            </div>    
-    </div>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src='https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js'></script>
+  <script src='https://www.gstatic.com/firebasejs/7.1.0/firebase-firestore.js'></script>
+  <script>
 
-</div>
+  </script>
+  <script src="./assets/js/profile.js"></script>
 
-
- 
 </body>
 </html>
