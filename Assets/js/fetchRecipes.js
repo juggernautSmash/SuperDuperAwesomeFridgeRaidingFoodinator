@@ -15,16 +15,13 @@ const addIngredientToDOM = ingredient => {//Creates an entry under ingredients w
   document.getElementById('ingredientsList').append(foodDiv)
 }//end addIngredientToDOM
 
-if (localStorage.getItem('myFood')){
   const retrieveIngredientsFromLocal = () => {
     let ingredients = JSON.parse(localStorage.getItem('myFood'))
-    console.log(ingredients.length)
-    ingredients.forEach( ingredient => {
+    ingredients.forEach(ingredient => {
       addIngredientToDOM(ingredient)
     })
-    }
-  retrieveIngredientsFromLocal()
-}
+  }
+
 
 const generateRecipeCard = ({ id, title, image }) => {//Generate recipe card on the DOM based on selected FETCH 
   //console.log(`running generateRecipeCard`)
@@ -92,4 +89,5 @@ document.getElementById('fetchRecipes').addEventListener('click', e => {//FETCH 
     })//end catch
 })// end FETCH button action
 
+retrieveIngredientsFromLocal()
 
