@@ -1,88 +1,99 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>SuperDuperAwesomeFridgeRaidingFoodinator</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--Import Google Icon Font-->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-         
-    </head>
-    <body>
 
-        <div><!-- Header Navbar-->
-            <nav>
-                <div class="nav-wrapper blue-grey darken-4">
-                    <a href="#" class="brand-logo center">SDAFRF</a>
-                    <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down ">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="settings.html">Settings</a></li>
-                            <li><a href="recipes.html">Recipes</a></li>
-                            <li><a href="login.html">Sign Out</a></li>
-                    </ul>
-                    <!-- Navigation for mobile menu-->
-                    <ul class="sidenav blue-grey" id="mobile-menu">
-                        <li><a href="profile.html">Profile</a></li>
-                        <li><a href="settings.html">Settings</a></li>
-                        <li><a href="recipes.html">Recipes</a></li>
-                        <li><a href="login.html">Sign Out</a></li>
-                    </ul>
-                    <form>
-                        <div class="input-field left">
-                        <input id="search" type="search" required>
-                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
-                        </div>
-                    </form>
-                </div>
-            </nav>
-        </div><!--End Navbar-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>SuperDuperAwesomeFridgeRaidingFoodinator</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--Import Google Icon Font-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-        <!-- Food Inventory-->
-        <div class="container">
-            <div id="addFood" class="row">
-                <form><!-- Input food items-->
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input placeholder="Enter ingredients" id="foodItem" type="text" class="validate">
-                            <label for="foodItem">Food Ingredient</label>
-                            <button id="addItem" class="waves-effect waves-red blue-grey darken btn">Add</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div id="ingredients"><!-- Display inputted foods with check box-->
-                <h3>Ingredients</h1>
-                <forms id="ingredientsList"></forms>
-            </div>
-            <div id="fetchRecipe">
-                <button id="fetchRecipes" class="waves-effect waves-red blue-grey darken btn">Fetch Recipe</button>
-            </div>
+</head>
+
+<body>
+
+  <div>
+    <!-- Header Navbar-->
+    <nav>
+      <div class="nav-wrapper blue-grey darken-4">
+        <a href="#" class="brand-logo center">SDAFRF</a>
+        <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down ">
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="settings.html">Settings</a></li>
+          <li><a href="recipes.html">Recipes</a></li>
+          <li><a href="login.html">Sign Out</a></li>
+        </ul>
+        <!-- Navigation for mobile menu-->
+        <ul class="sidenav blue-grey" id="mobile-menu">
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="settings.html">Settings</a></li>
+          <li><a href="recipes.html">Recipes</a></li>
+          <li><a href="login.html">Sign Out</a></li>
+        </ul>
+        <form>
+          <div class="input-field left">
+            <input id="search" type="search" required>
+            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+            <i class="material-icons">close</i>
+          </div>
+        </form>
+      </div>
+    </nav>
+  </div>
+  <!--End Navbar-->
+
+  <!-- Food Inventory-->
+  <div class="container">
+    <div id="addFood" class="row">
+      <form>
+        <!-- Input food items-->
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="Enter ingredients" id="foodItem" type="text" class="validate">
+            <label for="foodItem">Food Ingredient</label>
+            <button id="addItem" class="waves-effect waves-red blue-grey darken btn">Add</button>
+          </div>
         </div>
+      </form>
+    </div>
+    <div id="ingredients">
+      <!-- Display inputted foods with check box-->
+      <h3>Ingredients</h1>
+        <forms id="ingredientsList">
 
-        <div id="fetchResults" class="container"><!-- search results based on checked ingredients-->
-            <h3>Fetch Results</h3>
-        </div>
+        </forms>
+    </div>
+    <div id="fetchRecipe">
+      <button id="fetchRecipes" class="waves-effect waves-red blue-grey darken btn">Fetch Recipe</button>
+    </div>
+  </div>
+
+  <div id="fetchResults" class="container">
+    <!-- search results based on checked ingredients-->
+    <h3>Fetch Results</h3>
+  </div>
 
 
-        <script>
-            //Initialize nav bar
-         document.addEventListener('DOMContentLoaded', function() {
-            const elems = document.querySelectorAll('.sidenav');
-            const instances = M.Sidenav.init(elems, {edge:'right'});
-        });
-        
-        </script>
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <!-- Initilize Firebase and Firestore -->
-        <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
-        <!-- JS to fetch recipes -->
-        <script src="./assets/js/fetchRecipes.js"></script>
-    </body>
+  <script>
+    //Initialize nav bar
+    document.addEventListener('DOMContentLoaded', function () {
+      const elems = document.querySelectorAll('.sidenav');
+      const instances = M.Sidenav.init(elems, { edge: 'right' });
+    });
+
+  </script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Initilize Firebase and Firestore -->
+  <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
+  <!-- JS to fetch recipes -->
+  <script src="./assets/js/fetchRecipes.js"></script>
+  <script src="./Assets/js/firebaseToLocalStorage.js"></script>
+</body>
+
 </html>
