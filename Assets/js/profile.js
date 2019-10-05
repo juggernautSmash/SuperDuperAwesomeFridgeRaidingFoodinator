@@ -1,19 +1,5 @@
 console.log('profile.js is linked')
-
-// Your web app's Firebase configuration
-var firebaseConfig = {
-    apiKey: 'AIzaSyC0N5n6Wa6j4I_UX0DJ2Td1aymh7l2UVq8',
-    authDomain: 'sdafrf-442fb.firebaseapp.com',
-    databaseURL: 'https://sdafrf-442fb.firebaseio.com',
-    projectId: 'sdafrf-442fb',
-    storageBucket: 'sdafrf-442fb.appspot.com',
-    messagingSenderId: '1079646422636',
-    appId: '1:1079646422636:web:73b3bec708ef08768f7a49'
-    };
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-const userDb = firebase.firestore().collection('testDb')
+let email = localStorage.getItem('email')
 
 const generateMyRecipeCard = ({id, title, img, url}) => {//Generate recipe card on the DOM based on selected FETCH 
     //console.log(`running generateRecipeCard`)
@@ -21,72 +7,112 @@ const generateMyRecipeCard = ({id, title, img, url}) => {//Generate recipe card 
     recipeCard.id = id
     recipeCard.className = 'card'
     recipeCard.innerHTML = `
-        <div class='card-content'>
-            <a href='${url}'>
-            <img src='${img}'
-            <span class='card-title'>${title}</span>
+        <div class='card-image'>
+            <a href='${url}' target='_blank'>
+            <img class='card-image' src='${img}'>
+            <div class='card-title blue-grey darken-4'>
+                <span class='recipe-title'>${title}</span>
+            </div>
             </a>
         </div>
     `
     document.getElementById('myRecipes').append(recipeCard)
 }// end generateMyRecipeCard
 
+const addIngredientToDOM = ingredient => {//Creates an entry under ingredients with checkbox
+    let foodDiv = document.createElement('li')
+    foodDiv.id = ingredient
+    foodDiv.innerHTML = `
+        <div class="chip">
+            ${ingredient}
+            <i data-food='${ingredient}' class="close material-icons">close</i>
+        </div>
+    `
+    document.getElementById('ingredientsList').append(foodDiv)
+} //end addIngredientToDOM
+
 const getProfile = () => {
-  userDb.doc('julius.casipit@gmail.com').get()
+    // email = localStorage.getItem('email')
+
+    usersDb.doc(email).get()
     .then(data => {
-        console.log(data.data())
+
+        //Update Personal Info card
         document.getElementById('name').textContent = data.data().displayName
         document.getElementById('email').textContent = data.data().email
-    })  
 
-  userDb.doc('julius.casipit@gmail.com').get()
-    .then(data => {
-        console.log(data.data().myFood)
-        document.getElementById('ingredientsList').textContent = data.data().myFood
-        document.getElementById('email').textContent = data.data().email
-            
-    })  
+        //Update My Ingredients
+        // console.log('food is...')
+        // console.log(typeof(data.data().myFood))
+        // console.log(data.data().myFood)
+        data.data().myFood.forEach(food => {
+            addIngredientToDOM(food)
+        })
+        //document.getElementById('ingredientsList').textContent = data.data().myFood
 
-  userDb.doc('julius.casipit@gmail.com').get()
-    .then(data => {
-        console.log(data.data().myRecipe)
-        //document.getElementById('recipe').textContent = data.data().myRecipe
-        document.getElementById('email').textContent = data.data().email
-        
+        //Update My Recipes
         data.data().myRecipe.forEach( recipe => {
             generateMyRecipeCard(recipe)
         })
+    })
+    .catch( e => {
+        console.log('an error has occured')
+        console.log(e)
+    }) 
+} // end getProfile
 
-    })   
-
+const addToLocalStorage = (key, value) =>{
+    if(localStorage.getItem(key) === null){
+        console.log(`${key} does not exist`)
+    } else {
+        console.log(`key is ${key}`)   
+        let keyValue = JSON.parse(localStorage.getItem(key))
+        keyValue.push(value)
+        localStorage.setItem(key,JSON.stringify(keyValue))
+    }
 }
 
+const removeFromLocalStorage = (key, value) => {
+    if(localStorage.getItem(key) === null){
+        console.log(`${key} does not exist`)
+    } else {
+        console.log(`key is ${key}`)   
+        let keyValue = JSON.parse(localStorage.getItem(key)) //
+        keyValue.splice(keyValue.indexOf(value), 1)
+        localStorage.setItem(key,JSON.stringify(keyValue))
+    }
+}
 
-
-const addIngredientToDOM = ingredient => {//Creates an entry under ingredients with checkbox
-    let foodDiv = document.createElement('div')
-    foodDiv.id = ingredient
-    foodDiv.innerHTML = `
-        <li>
-           
-            <span>${ingredient}</span>
-        </li>
-    `
-    document.getElementById('ingredientsList').append(foodDiv)
-}//end addIngredientToDOM
 document.getElementById('addItem').addEventListener('click', e => {// Add button action
     e.preventDefault()
 
     //take value in the text field
     let ingredient = document.getElementById('foodItem').value
 
-    //console.log(ingredient)
-    // userIngredients.push(ingredient)
+    // add food ingredient to the DOM
     addIngredientToDOM(ingredient)
+    // add food ingredient to firestore
+    usersDb.doc(email).update({
+        myFood: firebase.firestore.FieldValue.arrayUnion(ingredient)
+    })
 
+    addToLocalStorage('myFood', ingredient)
+
+    // Clear the text field
     document.getElementById('foodItem').value = ''
+
 })//end ADD button action
 
-
+document.addEventListener('click', ({target}) => {
+    if(target.className === 'close material-icons'){
+        console.log(`X was pressed with dataset ${target.dataset.food}`)
+        // Remove from firestore
+        usersDb.doc(email).update({
+            myFood: firebase.firestore.FieldValue.arrayRemove(target.dataset.food)
+        })
+        // Remove from localStorage
+        removeFromLocalStorage('myFood', target.dataset.food )
+    }
+})
 
 getProfile()
