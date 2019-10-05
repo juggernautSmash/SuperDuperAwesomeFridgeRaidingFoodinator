@@ -1,5 +1,6 @@
 console.log('profile.js is linked')
 let email = localStorage.getItem('email')
+let userIngredients = []
 
 const generateMyRecipeCard = ({id, title, img, url}) => {//Generate recipe card on the DOM based on selected FETCH 
     //console.log(`running generateRecipeCard`)
@@ -51,7 +52,7 @@ const getProfile = () => {
         //document.getElementById('ingredientsList').textContent = data.data().myFood
 
         //Update My Recipes
-        data.data().myRecipe.forEach( recipe => {
+        data.data().myRecipes.forEach( recipe => {
             generateMyRecipeCard(recipe)
         })
     })
@@ -89,8 +90,16 @@ document.getElementById('addItem').addEventListener('click', e => {// Add button
     //take value in the text field
     let ingredient = document.getElementById('foodItem').value
 
-    // add food ingredient to the DOM
-    addIngredientToDOM(ingredient)
+
+    //handler if no ingredients text
+    if(ingredient === ''){
+        swal("Please input an ingredient")
+    }
+    else{
+        userIngredients.push(ingredient)
+        addIngredientToDOM(ingredient)
+    }
+
     // add food ingredient to firestore
     usersDb.doc(email).update({
         myFood: firebase.firestore.FieldValue.arrayUnion(ingredient)
@@ -104,7 +113,7 @@ document.getElementById('addItem').addEventListener('click', e => {// Add button
 })//end ADD button action
 
 document.addEventListener('click', ({target}) => {
-    if(target.className === 'close material-icons'){
+    if(target.className === 'close material-icons'){// Remove a food item
         console.log(`X was pressed with dataset ${target.dataset.food}`)
         // Remove from firestore
         usersDb.doc(email).update({

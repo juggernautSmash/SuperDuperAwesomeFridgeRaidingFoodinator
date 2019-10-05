@@ -18,7 +18,7 @@
   color: #cfd8dc;
 }
 
-ul {
+.foodList {
   list-style-type: none;
   columns: 2;
   -webkit-columns:2;

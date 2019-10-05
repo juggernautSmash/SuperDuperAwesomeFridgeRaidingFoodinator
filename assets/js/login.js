@@ -2,7 +2,7 @@ console.log('login.js is linked')
 
 // FirebaseUI config.
 const uiConfig = {
-    //signInSuccessUrl: './profile.html',
+    signInSuccessUrl: './profile.html',
     signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
@@ -32,21 +32,27 @@ loginBtn.addEventListener('click', e => {
     // Get email and password
     const email = emailIn.value
     const password = passwordIn.value
-    console.log(`
-    email is ${email}
-    password is ${password}
-    `)
 
-    auth.signInWithEmailAndPassword(email, password)
-    .then(r => {
-        console.log('login successful')
-        console.log(r)
+    if(email.length !== 0){
+        console.log(`
+        email is ${email}
+        password is ${password}
+        `)
 
-    })
-    .catch(error => {
-        console.log('an error has occured')
-        console.log(e.message)
-    })
+        auth.signInWithEmailAndPassword(email, password)
+        .then(r => {
+            console.log('login successful')
+            console.log(r)
+    
+        })
+        .catch(e => {
+            console.log('an error has occured')
+            console.log(e.message)
+        })
+    } else{
+        swal('Please enter user')
+    }
+
 })
 
 signUpBtn.addEventListener('click', e => {
@@ -60,7 +66,7 @@ signUpBtn.addEventListener('click', e => {
         console.log('login successful')
         console.log(r)
     })
-    .catch(error => {
+    .catch(e => {
         console.log('an error has occured')
         console.log(e.message)
     });
@@ -88,10 +94,15 @@ auth.onAuthStateChanged(user => {
                 //Create a user profile in firestore 
                 let userObj = {
                     displayName: user.displayName,
-                    email: user.email
+                    email: user.email,
+                    myFood: [],
+                    myRecipes: [],
+                    allergies: []
                     }
                 usersDb.doc(user.email).set(userObj)
                 localStorage.setItem('email', user.email)
+                localStorage.setItem('myFood', JSON.stringify(user.myFood))
+                localStorage.setItem('myRecipes', JSON.stringify(user.myRecipes))            
             }
         })
     } else { // if signed out display sign in button and disable sign out button
@@ -103,6 +114,7 @@ auth.onAuthStateChanged(user => {
         //Remove email from local storage
         localStorage.removeItem('email')
         localStorage.removeItem('myFood')
+        localStorage.removeItem('myRecipes')
     }
 })
 
@@ -115,6 +127,7 @@ document.getElementById('signOut').addEventListener('click', e => {
     auth.signOut()
   })
 
+// Change text in the password field to show text or dots
 document.getElementById('showPass').addEventListener('change', e => {
     //e.preventDefault()
     console.log(`showPass is clicked`)

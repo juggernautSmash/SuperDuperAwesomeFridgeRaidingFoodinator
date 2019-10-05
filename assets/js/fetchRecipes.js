@@ -1,93 +1,204 @@
+console.log('fetchRecipes.js is linked')
+let email = localStorage.getItem('email')
+
 let userIngredients = []
+let selectedIngredients = []
 let apiKey = '1627e18e0caa4fd4890ad8754a8f6ed8'
+let savedRecipes = []
 
 const addIngredientToDOM = ingredient => {//Creates an entry under ingredients with checkbox
-  let foodDiv = document.createElement('div')
-  foodDiv.id = ingredient
-  foodDiv.innerHTML = `
-        <p>
-            <label>
-                <input class="with-gap" name="ingredient" type="checkbox" value='${ingredient}'/>
-                <span>${ingredient}</span>
-            </label>
-        </p>
+    let foodDiv = document.createElement('li')
+    foodDiv.id = ingredient
+    foodDiv.innerHTML = `
+        <label>
+            <input class="with-gap" name="ingredient" type="checkbox" value='${ingredient}'/>
+            <span>${ingredient}</span>
+        </label>
     `
-  document.getElementById('ingredientsList').append(foodDiv)
+    document.getElementById('ingredientsList').append(foodDiv)
 }//end addIngredientToDOM
 
-  const retrieveIngredientsFromLocal = () => {
-    let ingredients = JSON.parse(localStorage.getItem('myFood'))
-    ingredients.forEach(ingredient => {
-      addIngredientToDOM(ingredient)
-    })
-  }
+const generateRecipeCard = ({ id, title, image, missedIngredientCount}) => {//Generate recipe card on the DOM based on selected FETCH 
+    //console.log(`running generateRecipeCard`)
 
+    fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`)
+        .then(r => r.json())
+        .then(recipe => {
+            //console.log(`recipe URL is ${recipe.sourceUrl}`)
+            //recipeUrl = recipe.sourceUrl
 
-const generateRecipeCard = ({ id, title, image }) => {//Generate recipe card on the DOM based on selected FETCH 
-  //console.log(`running generateRecipeCard`)
-
-  fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`)
-    .then(r => r.json())
-    .then(recipe => {
-      //console.log(`recipe URL is ${recipe.sourceUrl}`)
-      //recipeUrl = recipe.sourceUrl
-      let recipeCard = document.createElement('div')
-      recipeCard.id = id
-      recipeCard.className = 'card'
-      recipeCard.innerHTML = `
-                <div class='card-content'>
-                    <a href='${recipe.sourceUrl}'>
-                    <img src='${image}'
-                    <span class='card-title'>${title}</span>
+            let recipeCard = document.createElement('div')
+            recipeCard.id = id
+            recipeCard.className = 'col s6 card'
+            recipeCard.innerHTML = `
+                <div class='col s6 card-image'>
+                    <button class='saveRecipe btn-floating btn-large waves-effect waves-red blue-grey darken'>
+                        <i class='save material-icons' 
+                            data-title='${title}' 
+                            data-id='${id}' 
+                            data-img='${image}' 
+                            data-url='${recipe.sourceUrl}' 
+                            data-saved='false'>add</i>
+                    </button>
+                    <a href='${recipe.sourceUrl}' target='_blank'>
+                    <img class='card-image' src='${image}'>
+                    <div class='card-title blue-grey darken-4'>
+                        <span class='recipe-title'>${title}</span>
+                    </div>
                     </a>
                 </div>
             `
+            console.log('generate recipe card in all recipe')
+            document.getElementById('allRecipes').append(recipeCard)
 
-      document.getElementById('fetchResults').append(recipeCard)
-    })//end then
-    .catch(err => {
-      console.log(`something went wrong getting the recipe`)
-    })//end catch
-}// end generateRecipeCard
+            if(missedIngredientCount > 0){
+                let makeLaterCard = document.createElement('div')
+                makeLaterCard.id = id
+                makeLaterCard.className = 'col s6 card'
+                makeLaterCard.innerHTML = `
+                    <div class='col s6 card-image'>
+                        <button class='saveRecipe btn-floating btn-large waves-effect waves-red blue-grey darken'>
+                            <i class='save material-icons' 
+                                data-title='${title}' 
+                                data-id='${id}' 
+                                data-img='${image}' 
+                                data-url='${recipe.sourceUrl}' 
+                                data-saved='false'>add</i>
+                        </button>
+                        <a href='${recipe.sourceUrl}' target='_blank'>
+                        <img class='card-image' src='${image}'>
+                        <div class='card-title blue-grey darken-4'>
+                            <span class='recipe-title'>${title}</span>
+                        </div>
+                        </a>
+                    </div>
+                `
+                console.log(`missedIngredientCount is ${missedIngredientCount}`)
+                console.log('generating recipeCard in makeLater')
+                document.getElementById('makeLater').append(makeLaterCard)
+            } else {
+                let makeNowCard = document.createElement('div')
+                makeNowCard.id = id
+                makeNowCard.className = 'col s6 card'
+                makeNowCard.innerHTML = `
+                    <div class='col s6 card-image'>
+                        <button class='saveRecipe btn-floating btn-large waves-effect waves-red blue-grey darken'>
+                            <i class='save material-icons' 
+                                data-title='${title}' 
+                                data-id='${id}' 
+                                data-img='${image}' 
+                                data-url='${recipe.sourceUrl}'
+                                data-saved='false'>add</i>
+                        </button>
+                        <a href='${recipe.sourceUrl}' target='_blank'>
+                        <img class='card-image' src='${image}'>
+                        <div class='card-title blue-grey darken-4'>
+                            <span class='recipe-title'>${title}</span>
+                        </div>
+                        </a>
+                    </div>
+                `
+                console.log(`missedIngredientCount is ${missedIngredientCount}`)
+                console.log('generating recipeCard in makeNow')
+                document.getElementById('makeNow').append(makeNowCard)               
+            }
+            // document.getElementById('makeLater').append(recipeCard)
+        })//end then
+        .catch(err => {
+            console.log(`something went wrong getting the recipe`)
+            console.log(err)
+        })//end catch
+} // end generateRecipeCard
 
-document.getElementById('addItem').addEventListener('click', e => {// Add button action
-  e.preventDefault()
+const getFood = () => {
+    let foods = JSON.parse(localStorage.getItem('myFood'))
 
-  //take value in the text field
-  let ingredient = document.getElementById('foodItem').value
+    foods.forEach( food => {
+        addIngredientToDOM(food)
+    })
+}
 
-  //console.log(ingredient)
-  userIngredients.push(ingredient)
-  addIngredientToDOM(ingredient)
+document.getElementById('addItem').addEventListener('click', e => { // Add button action
+    e.preventDefault()
 
-  document.getElementById('foodItem').value = ''
+    //take value in the text field
+    let ingredient = document.getElementById('foodItem').value
+    
+    //handler if no ingredients text
+    if(ingredient === ''){
+        swal("Please input an ingredient")
+    }
+    else{
+        userIngredients.push(ingredient)
+        addIngredientToDOM(ingredient)
+    }
+    //console.log(ingredient)
+
+    document.getElementById('foodItem').value = ''
 })//end ADD button action
 
 document.getElementById('fetchRecipes').addEventListener('click', e => {//FETCH button action
-  console.log('Fetch Button is pressed')
-  let ingredients = document.getElementsByName('ingredient')
-  //console.log(ingredients)
-  let selectedIngredients = [] //store all the checked ingredients here
+    console.log('Fetch Button is pressed')
+    // Clear the results div
+    document.getElementById('allRecipes').innerHTML = ''
+    document.getElementById('makeNow').innerHTML = ''
+    document.getElementById('makeLater').innerHTML = ''
 
-  //check for which boxes are checked
-  for (let i = 0; i < ingredients.length; i++) {
-    ingredients[i].checked ? selectedIngredients.push(ingredients[i].value) : null
-  }
+    let ingredients = document.getElementsByName('ingredient')
+    
+    //console.log(ingredients)
+    let selectedIngredients = [] //store all the checked ingredients here
 
-  fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${selectedIngredients.toString()}&number=10`)
-    .then(r => r.json())//grab the recipes
-    .then(recipes => { //convert data to something readable
-      //console.log(e)
-      recipes.forEach(recipe => {//grab each recipe in from the data
-        // console.log(recipe.title)
-        generateRecipeCard(recipe)
-      });
-    })//end .then
-    .catch(err => {
-      console.log(`Error found`)
-      console.log(err)
-    })//end catch
+    //check for which boxes are checked
+    for(let i = 0; i < ingredients.length; i++){
+        ingredients[i].checked ? selectedIngredients.push(ingredients[i].value) : null
+    }
+
+    // Handler if no checked ingredients
+    if(selectedIngredients.length === 0){
+        swal('Please select ingredients to search recipes')
+    } else {
+        fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${selectedIngredients.toString()}&number=10`)
+        .then(r => r.json())//grab the recipes
+        .then( recipes => { //convert data to something readable
+            //console.log(e)
+            recipes.forEach(recipe => {//grab each recipe in from the data
+                // console.log(recipe.title)
+                // console.log(recipe.missedIngredientCount)
+                generateRecipeCard(recipe)
+                // recipe.missedIngredientCount === 0 ? yesMake.push(recipe.id) : notMake.push(recipe.id)
+            })
+        })//end .then
+        .catch(err => {
+            console.log(`Error found`)
+            console.log(err)
+        })//end catch
+    }
 })// end FETCH button action
 
-retrieveIngredientsFromLocal()
+document.addEventListener('click', ({target:recipe}) => {
+    if(recipe.className === 'save material-icons'){
+        console.log('save recipe button pressed')
+        console.log(`Is the recipe saved? ${recipe.dataset.saved}`)
+        if( recipe.dataset.saved === 'false' ){
+            let saveRecipe = {
+                id: recipe.dataset.id,
+                title: recipe.dataset.title,
+                img: recipe.dataset.img,
+                url: recipe.dataset.url
+            }
+            savedRecipes.push(saveRecipe)
+            recipe.dataset.saved = 'true'
 
+            usersDb.doc(email).update({
+                myRecipes: firebase.firestore.FieldValue.arrayUnion(saveRecipe)
+            }) 
+
+            console.log(`recipe is saved`)
+        }// end if
+    }// end if
+
+
+})// end addEventListener
+
+getFood()
