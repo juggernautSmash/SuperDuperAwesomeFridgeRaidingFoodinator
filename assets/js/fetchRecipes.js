@@ -24,9 +24,8 @@ const generateRecipeCard = ({ id, title, image, missedIngredientCount}) => {//Ge
     fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`)
         .then(r => r.json())
         .then(recipe => {
-            //console.log(`recipe URL is ${recipe.sourceUrl}`)
-            //recipeUrl = recipe.sourceUrl
 
+            //Generate recipeCard in the ALL tab
             let recipeCard = document.createElement('div')
             recipeCard.id = id
             recipeCard.className = 'col s6 card'
@@ -51,6 +50,7 @@ const generateRecipeCard = ({ id, title, image, missedIngredientCount}) => {//Ge
             console.log('generate recipe card in all recipe')
             document.getElementById('allRecipes').append(recipeCard)
 
+            //Generate recipeCard in the Some Groceries tab
             if(missedIngredientCount > 0){
                 let makeLaterCard = document.createElement('div')
                 makeLaterCard.id = id
@@ -76,7 +76,7 @@ const generateRecipeCard = ({ id, title, image, missedIngredientCount}) => {//Ge
                 console.log(`missedIngredientCount is ${missedIngredientCount}`)
                 console.log('generating recipeCard in makeLater')
                 document.getElementById('makeLater').append(makeLaterCard)
-            } else {
+            } else { // Generate recipeCard to Make Now tab
                 let makeNowCard = document.createElement('div')
                 makeNowCard.id = id
                 makeNowCard.className = 'col s6 card'
@@ -116,7 +116,34 @@ const getFood = () => {
     foods.forEach( food => {
         addIngredientToDOM(food)
     })
-}
+} //end getFood
+
+const addToLocalStorage = (key, value) =>{
+    console.log(`running addToLocalStorage`)
+    if(localStorage.getItem(key) === null){
+        console.log(`${key} does not exist`)
+    } else {
+        console.log(`key is ${key}`)
+        //Get the value in localStorage   
+        let keyValue = JSON.parse(localStorage.getItem(key))
+        //Push the new value in the data retrieved from localStroge
+        keyValue.push(value)
+        //Push the updated value to localStorage
+        localStorage.setItem(key,JSON.stringify(keyValue))
+    }
+} //end addToLocalStorage
+
+const removeFromLocalStorage = (key, value) => {
+    console.log(`running removeFromLocalStorage`)
+    if(localStorage.getItem(key) === null){
+        console.log(`${key} does not exist`)
+    } else {
+        console.log(`key is ${key}`)   
+        let keyValue = JSON.parse(localStorage.getItem(key)) //
+        keyValue.splice(keyValue.indexOf(value), 1)
+        localStorage.setItem(key,JSON.stringify(keyValue))
+    }
+} //end removeFromLocalStorage
 
 document.getElementById('addItem').addEventListener('click', e => { // Add button action
     e.preventDefault()
@@ -127,8 +154,9 @@ document.getElementById('addItem').addEventListener('click', e => { // Add butto
     //handler if no ingredients text
     if(ingredient === ''){
         swal("Please input an ingredient")
-    }
-    else{
+    } else if(JSON.parse(localStorage.getItem('myFood')).indexOf(ingredient) >= 0 ){
+        swal(`${ingredient} is already in your list`)
+    } else{
         userIngredients.push(ingredient)
         addIngredientToDOM(ingredient)
     }
@@ -197,8 +225,6 @@ document.addEventListener('click', ({target:recipe}) => {
             console.log(`recipe is saved`)
         }// end if
     }// end if
-
-
 })// end addEventListener
 
 getFood()

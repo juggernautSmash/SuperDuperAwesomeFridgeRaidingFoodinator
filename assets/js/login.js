@@ -1,24 +1,5 @@
 console.log('login.js is linked')
 
-// FirebaseUI config.
-const uiConfig = {
-    signInSuccessUrl: './profile.html',
-    signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
-    ]
-}
-
-// Initialize the FirebaseUI Widget using Firebase.
-const ui = new firebaseui.auth.AuthUI(firebase.auth())
-
-// The start method will wait until the DOM is loaded.
-ui.start('#firebaseui-auth-container', uiConfig)
-
-// simplify auth method
-const auth = firebase.auth()
-
 // Get elements
 const emailIn = document.getElementById('email')
 const passwordIn = document.getElementById('pass')
@@ -86,11 +67,13 @@ auth.onAuthStateChanged(user => {
             if( r.exists ){//If the user exists
                 //push email to localStorage
                 console.log(`user exists`)
+                console.log(`storing user info from firebase to localStorage`)
                 localStorage.setItem('email', JSON.stringify(r.data().email))
                 localStorage.setItem('myFood', JSON.stringify(r.data().myFood))
                 localStorage.setItem('myRecipes', JSON.stringify(r.data().myRecipes))
             } else {// if the user does not exist, most likely new user
                 console.log(`user does not exist`)
+                console.log(`creating user profile in firestore`)
                 //Create a user profile in firestore 
                 let userObj = {
                     displayName: user.displayName,
@@ -99,10 +82,11 @@ auth.onAuthStateChanged(user => {
                     myRecipes: [],
                     allergies: []
                     }
+                console.log(`storing generated user info to localStorage`)
                 usersDb.doc(user.email).set(userObj)
-                localStorage.setItem('email', user.email)
-                localStorage.setItem('myFood', JSON.stringify(user.myFood))
-                localStorage.setItem('myRecipes', JSON.stringify(user.myRecipes))            
+                localStorage.setItem('email', JSON.stringify(userObj.email))
+                localStorage.setItem('myFood', JSON.stringify(userObj.myFood))
+                localStorage.setItem('myRecipes', JSON.stringify(userObj.myRecipes))            
             }
         })
     } else { // if signed out display sign in button and disable sign out button
@@ -117,15 +101,6 @@ auth.onAuthStateChanged(user => {
         localStorage.removeItem('myRecipes')
     }
 })
-
-// Add sign off button
-document.getElementById('signOut').addEventListener('click', e => {
-    auth.signOut()
-  })
-
-  document.getElementById('signOutm').addEventListener('click', e => {
-    auth.signOut()
-  })
 
 // Change text in the password field to show text or dots
 document.getElementById('showPass').addEventListener('change', e => {

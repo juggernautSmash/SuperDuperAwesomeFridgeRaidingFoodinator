@@ -24,14 +24,14 @@
                     <li><a class="blue-grey-text text-lighten-4" href="profile.html">Profile</a></li>
                     <li><a class="blue-grey-text text-lighten-4" href="settings.html">Settings</a></li>
                     <li><a class="blue-grey-text text-lighten-4" href="recipes.html">Recipes</a></li>
-                    <li><a class="blue-grey-text text-lighten-4 signOut" href="index.html">Sign Out</a></li>
+                    <li><a id="signOut" class="blue-grey-text text-lighten-4 hide" href="index.html">Sign Out</a></li>
                 </ul>
                 <!-- Navigation for mobile menu-->
                 <ul class="sidenav blue-grey " id="mobile-menu">
                     <li><a class="blue-grey-text text-lighten-4" href="profile.html">Profile</a></li>
                     <li><a class="blue-grey-text text-lighten-4" href="settings.html">Settings</a></li>
                     <li><a class="blue-grey-text text-lighten-4" href="recipes.html">Recipes</a></li>
-                    <li><a class="blue-grey-text text-lighten-4 signOut" href="index.html">Sign Out</a></li>
+                    <li><a id="signOutm" class="blue-grey-text text-lighten-4 hide" href="index.html">Sign Out</a></li>
                 </ul>
             </div>
         </nav><!--End Navbar-->
@@ -63,9 +63,9 @@
             <div class="row">
                 <div class="col s12">
                     <ul class="tabs">
-                        <li class="tab col s3"><a id="allResults" class="active">All Results</a></li>
-                        <li class="tab col s3"><a id='yesMake'>Make Now</a></li>
-                        <li class="tab col s3"><a id='noMake'>Some Grocery</a></li>               
+                        <li class="tab col s3"><a id="allResults" class="active">ALL</a></li>
+                        <li class="tab col s3"><a id="yesMake">MAKE NOW</a></li>
+                        <li class="tab col s3"><a id="noMake">SOME GROCERY</a></li>               
                     </ul>
                 </div>
             </div>
@@ -98,9 +98,12 @@
         <!-- Initilize Firebase and Firestore -->
         <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.js"></script>
         <!-- JS to fetch recipes -->
         <script src="./assets/js/firebaseInit.js"></script>
         <script src="./assets/js/fetchRecipes.js"></script>
         <script src="./assets/js/tabs.js"></script>
+        <script src="./assets/js/signOut.js"></script>
     </body>
 </html>
