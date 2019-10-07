@@ -8,16 +8,31 @@ const generateMyRecipeCard = ({id, title, img, url}) => {//Generate recipe card 
     //console.log(`running generateRecipeCard`)
     let recipeCard = document.createElement('div')
     recipeCard.id = id
-    recipeCard.className = 'card'
+    recipeCard.className = 'row'
     recipeCard.innerHTML = `
-        <div class='card-image'>
-            <a href='${url}' target='_blank'>
-            <img class='card-image' src='${img}'>
-            <div class='card-title blue-grey darken-4'>
-                <span class='recipe-title'>${title}</span>
-            </div>
+    <div class="row">
+    <div class="col s12 m6">
+        <div class="card">
+            <div class="card-image">
+            <img src="${img}">
+            <!-- <span class="card-title recipe-title">${title}</span> -->
+            <a class="btn-floating halfway-fab waves-effect waves-light activator red">
+                <i class="material-icons">clear</i>
             </a>
+            </div>
+            <div class="card-content blue-grey darken-4">
+                <p class="recipe-title">${title}</p>
+            </div>
+            <div class="card-reveal blue-grey darken-4 ">
+                <span class="card-title grey-text text-lighten-4">Remove Recipe?
+                    <i class="material-icons right">close</i>
+                </span>
+                <button class="waves-effect waves-red red btn">YES</button>
+                <button class="waves-effect waves-red blue-grey darken btn">NO</button>
+            </div>
         </div>
+    </div>
+</div>
     `
     document.getElementById('myRecipes').append(recipeCard)
 }// end generateMyRecipeCard

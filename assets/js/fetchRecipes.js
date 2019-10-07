@@ -28,24 +28,30 @@ const generateRecipeCard = ({ id, title, image, missedIngredientCount}) => {//Ge
             //Generate recipeCard in the ALL tab
             let recipeCard = document.createElement('div')
             recipeCard.id = id
-            recipeCard.className = 'col s6 card'
+            recipeCard.className = 'row'
             recipeCard.innerHTML = `
-                <div class='col s6 card-image'>
-                    <button class='saveRecipe btn-floating btn-large waves-effect waves-red blue-grey darken'>
-                        <i class='save material-icons' 
-                            data-title='${title}' 
-                            data-id='${id}' 
-                            data-img='${image}' 
-                            data-url='${recipe.sourceUrl}' 
-                            data-saved='false'>add</i>
-                    </button>
-                    <a href='${recipe.sourceUrl}' target='_blank'>
-                    <img class='card-image' src='${image}'>
-                    <div class='card-title blue-grey darken-4'>
-                        <span class='recipe-title'>${title}</span>
+                <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-image">
+                        <a href='${recipe.sourceUrl}' target='_blank'>
+                        <img src="${image}">
+                        </a>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red">
+                            <i class="save material-icons" 
+                                data-title='${title}' 
+                                data-id='${id}' 
+                                data-img='${image}' 
+                                data-url='${recipe.sourceUrl}' 
+                                data-saved='false'>add</i>
+                        </a>
                     </div>
-                    </a>
+                    <div class="card-content blue-grey darken-4">
+                        <a href='${recipe.sourceUrl}' target='_blank'>
+                            <p class="recipe-title">${title}</p>
+                        </a>
+                    </div>
                 </div>
+            </div>
             `
             console.log('generate recipe card in all recipe')
             document.getElementById('allRecipes').append(recipeCard)
