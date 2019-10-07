@@ -68,7 +68,7 @@ auth.onAuthStateChanged(user => {
                 //push email to localStorage
                 console.log(`user exists`)
                 console.log(`storing user info from firebase to localStorage`)
-                localStorage.setItem('email', JSON.stringify(r.data().email))
+                localStorage.setItem('email', r.data().email)
                 localStorage.setItem('myFood', JSON.stringify(r.data().myFood))
                 localStorage.setItem('myRecipes', JSON.stringify(r.data().myRecipes))
             } else {// if the user does not exist, most likely new user
