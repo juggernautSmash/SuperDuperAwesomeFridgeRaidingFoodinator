@@ -14,14 +14,18 @@ const generateMyRecipeCard = ({id, title, img, url}) => {//Generate recipe card 
     <div class="col s12 m6">
         <div class="card">
             <div class="card-image">
-            <img src="${img}">
+                <a href='${url}' target='_blank'>
+                <img src="${img}">
+                </a>
             <!-- <span class="card-title recipe-title">${title}</span> -->
             <a class="btn-floating halfway-fab waves-effect waves-light activator red">
                 <i class="material-icons">clear</i>
             </a>
             </div>
             <div class="card-content blue-grey darken-4">
-                <p class="recipe-title">${title}</p>
+                <a href='${url}' target='_blank'>
+                    <p class="recipe-title">${title}</p>
+                </a>
             </div>
             <div class="card-reveal blue-grey darken-4 ">
                 <span class="card-title grey-text text-lighten-4">Remove Recipe?
