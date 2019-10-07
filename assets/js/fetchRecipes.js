@@ -90,7 +90,7 @@ const generateRecipeCard = ({ id, title, image, missedIngredientCount}) => {//Ge
             } else { // Generate recipeCard to Make Now tab
                 let makeNowCard = document.createElement('div')
                 makeNowCard.id = id
-                makeNowCard.className = 'col s6 card'
+                makeNowCard.className = 'row'
                 makeNowCard.innerHTML = `
                     <div class="col s12 m6">
                         <div class="card">

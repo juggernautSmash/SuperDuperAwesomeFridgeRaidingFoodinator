@@ -84,7 +84,7 @@ auth.onAuthStateChanged(user => {
                     }
                 console.log(`storing generated user info to localStorage`)
                 usersDb.doc(user.email).set(userObj)
-                localStorage.setItem('email', JSON.stringify(userObj.email))
+                localStorage.setItem('email', userObj.email)
                 localStorage.setItem('myFood', JSON.stringify(userObj.myFood))
                 localStorage.setItem('myRecipes', JSON.stringify(userObj.myRecipes))            
             }
