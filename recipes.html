@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SuperDuperAwesomeFridgeRaidingFoodinator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Local CSS-->
+        <link type="text/css" rel="stylesheet" href="./assets/css/reset.css">
+        <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
+        <!-- Materilize CDN-->
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+        <!--Import Google Icon Font-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- Firbase CDNs-->
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.css">
+    </head>
+    <body>
+        <nav><!-- Header Navbar-->
+            <div class="nav-wrapper blue-grey darken-4 ">
+                <a id="home" href="./profile.html" class=left><i class="material-icons">home</i></a>
+                <a href="#" class="brand-logo center blue-grey-text text-lighten-4">SDAFRF</a>
+                <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down ">
+                    <li><a class="blue-grey-text text-lighten-4" href="profile.html">Profile</a></li>
+                    <li><a class="blue-grey-text text-lighten-4" href="settings.html">Settings</a></li>
+                    <li><a class="blue-grey-text text-lighten-4" href="recipes.html">Recipes</a></li>
+                    <li><a id="signOut" class="blue-grey-text text-lighten-4 hide" href="index.html">Sign Out</a></li>
+                </ul>
+                <!-- Navigation for mobile menu-->
+                <ul class="sidenav blue-grey " id="mobile-menu">
+                    <li><a class="blue-grey-text text-lighten-4" href="profile.html">Profile</a></li>
+                    <li><a class="blue-grey-text text-lighten-4" href="settings.html">Settings</a></li>
+                    <li><a class="blue-grey-text text-lighten-4" href="recipes.html">Recipes</a></li>
+                    <li><a id="signOutm" class="blue-grey-text text-lighten-4 hide" href="index.html">Sign Out</a></li>
+                </ul>
+            </div>
+        </nav><!--End Navbar-->
+        <div class="container">
+                <div class='row'>
+                        <div class="card col s12">
+                          <div class="card-content">
+                            <h1 class="card-title">My Food</h1>
+                              <div id="addDietItem" class="row">
+                                <form><!-- Input food items-->
+                                  <div class="row">
+                                    <div class="input-field col s6">
+                                        <div class="dropdown">
+                                          <button onclick="myFunction()" class="dropbtn">Diets</button>
+                                          <div id="myDropdown" class="dropdown-content">
+                                            <div class="btn-group">
+                                            <button id="Gluten Free" value="Gluten Free">Gluten Free</button>
+                                            <button id="Ketogenic" value="Ketogenic">Ketogenic</button>
+                                            <button id="Vegetarian" value="Vegetarian">Vegetarian</button>
+                                            <button id="Primal" value="Primal">Primal</button>
+                                            <button id="Whole30" value="Whole30">Whole30</button>
+                                          </div>
+                                          </div>
+                                        </div>                    
+                                    </div>
+                                  </div>
+                              </form>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+        <!-- Food Inventory-->
+            <div id="addFood" class="row">
+                <form><!-- Input food items-->
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Enter ingredients" id="foodItem" type="text" class="validate">
+                            <label for="foodItem">Food Ingredient</label>
+                            <button id="addItem" class="waves-effect waves-red blue-grey darken btn">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="ingredients" class="row"><!-- Display inputted foods with check box-->
+                <h3>Ingredients</h3>
+                <forms>
+                    <ul id="ingredientsList" class="foodList"></ul>
+                </forms>
+            </div>
+            <!-- Fetch Button-->
+            <div id="fetchRecipe" class="row">
+                <button id="fetchRecipes" class="waves-effect waves-red blue-grey darken btn">Fetch Recipe</button>
+            </div>
+
+            <!-- Recipe Organizer -->
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a id="allResults" class="active">ALL</a></li>
+                        <li class="tab col s3"><a id="yesMake">MAKE NOW</a></li>
+                        <li class="tab col s3"><a id="noMake">SOME GROCERY</a></li>               
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Tab Content-->
+            <div id="allRecipes" class=""></div><!-- all search results -->
+            <div id="makeNow" class="hide"><!-- search results based on checked ingredients--></div>
+            <div id="makeLater" class="hide"><!-- search results based on checked ingredients--></div>
+            
+        </div>
+
+        <!-- Materialize JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script>
+            //Initialize Materialize features
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize side nav feature
+                const sideNameElem = document.querySelectorAll('.sidenav')
+                M.Sidenav.init(sideNameElem, {edge:'right'})
+
+                // Initialize tabs feature
+                const tabElems = document.querySelectorAll('.tabs')
+                M.Tabs.init(tabElems, {
+                    //swipeable: true
+                });
+            });
+        </script>
+        <!-- Sweet Alert-->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <!-- Initilize Firebase and Firestore -->
+        <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/4.2.0/firebaseui.js"></script>
+        <!-- JS to fetch recipes -->
+        <script src="./assets/js/firebaseInit.js"></script>
+        <script src="./assets/js/fetchRecipes.js"></script>
+        <script src="./assets/js/tabs.js"></script>
+        <script src="./assets/js/signOut.js"></script>
+    </body>
+</html>

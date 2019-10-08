@@ -1,12 +1,9 @@
 .fade {
   background-color: black;
-  height: 812px;
-  top: 0px;
-  margin: 0 auto;
-  opacity: 0.85;
+  opacity: 0.70 !important; 
   color: white;
 }
-
+/* comment */
 .background {
   background-image: url(../../assets/images/refrigerator.png);
   background-position: center;
@@ -15,3 +12,130 @@
   margin: 0 auto;
   /* opacity: 0.6; */
 }
+
+#welcome, #intro {
+  max-width: 812px;
+  color: #cfd8dc;
+}
+
+.foodList {
+  list-style-type: none;
+  columns: 2;
+  -webkit-columns:2;
+  -moz-columns: 2;
+}
+
+li {
+  color: #cfd8dc;
+}
+
+/* Search Recipes Button*/
+#searchRecipes {
+  color: #cfd8dc;
+}
+
+.recipe-title {
+  color: #cfd8dc;
+}
+
+/* Save button */
+.saveRecipe {
+  position: absolute !important;
+  color: #cfd8dc;
+}
+
+/*for allResults tab*/
+#allResults {
+  color: #cfd8dc;
+}
+
+/*for yesMake tab*/
+#yesMake {
+  color: #cfd8dc;
+}
+
+/*for the noMake tab*/
+#noMake {
+  color: #cfd8dc;
+}
+
+/* Override materialise settings section*/
+.tabs {
+  background-color: #263238 !important;
+}
+
+.tab {
+  color: #cfd8dc !important;
+}
+
+.tabs .tab a:hover {
+  background-color: #78909c !important;
+  color: #455a64 !important;
+}
+
+.tabs .tab a.active{
+  background-color: #78909c !important;
+}
+
+.tabs .indicator {
+  background: rgb(155, 0, 0) !important;
+}
+
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+  background-color: #90a4ae !important;
+  outline: none !important;
+}
+
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+.btn-group button {
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  width: 100%; /* Set a width if needed */
+  display: block; /* Make the buttons appear below each other */
+}
+
+.btn-group button:not(:last-child) {
+  border-bottom: none; /* Prevent double borders */
+}
+
+
+/*end override materialise settings section*/
