@@ -18,12 +18,12 @@
   color: #cfd8dc;
 }
 
-.foodList {
+/* .foodList {
   list-style-type: none;
   columns: 2;
   -webkit-columns:2;
   -moz-columns: 2;
-}
+} */
 
 li {
   color: #cfd8dc;
