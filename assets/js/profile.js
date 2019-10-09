@@ -2,7 +2,7 @@ console.log('profile.js is linked')
 console.log('getting email info in localStorae')
 let email = localStorage.getItem('email')
 console.log(`email is ${email}`)
-let userIngredients = []
+//let userIngredients = []
 
 const generateMyRecipeCard = ({id, title, img, url}) => {//Generate recipe card on the DOM based on selected FETCH 
     //console.log(`running generateRecipeCard`)
@@ -118,22 +118,22 @@ document.getElementById('addItem').addEventListener('click', e => {// Add button
     //take value in the text field
     let ingredient = document.getElementById('foodItem').value
 
-    
     if(ingredient === ''){//handler if no ingredients text
         swal("Please input an ingredient")
     } else if(JSON.parse(localStorage.getItem('myFood')).indexOf(ingredient) >= 0 ){//if ingredient is already in the list
         swal(`${ingredient} is already in your list`)
     } else{// if ingredient is not in the list
-        userIngredients.push(ingredient)
+        //userIngredients.push(ingredient)
         addIngredientToDOM(ingredient)
-    }
 
-    // add food ingredient to firestore
-    usersDb.doc(email).update({
-        myFood: firebase.firestore.FieldValue.arrayUnion(ingredient)
-    })
+        // add food ingredient to firestore
+        usersDb.doc(email).update({
+            myFood: firebase.firestore.FieldValue.arrayUnion(ingredient)
+        })
 
-    addToLocalStorage('myFood', ingredient)
+        // add food ingredient to localStorage
+        addToLocalStorage('myFood', ingredient)
+    }// end else if
 
     // Clear the text field
     document.getElementById('foodItem').value = ''
