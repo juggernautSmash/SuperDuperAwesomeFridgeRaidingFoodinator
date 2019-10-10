@@ -5,24 +5,11 @@
   background-repeat: no-repeat;
   height: 812px; 
   margin: 0 auto;
-  /* opacity: 0.6; */
 }
 
-#columnBackground div:nth-child(2) {
-  background: rgba(0, 0, 0, 0.75);
-}
-
-#columnBackground{
-  margin-top: 0px;
-margin-bottom: 0px
-}
-
-#loginField {
-  width: 100%;
-  max-width: fit-content;
+#loginButtons {
   margin-bottom: 0px
 }
-
 #welcome, #intro {
   max-width: 812px;
   color: #cfd8dc;
