@@ -77,11 +77,13 @@ const getProfile = () => {
         data.data().myRecipes.forEach( recipe => {
             generateMyRecipeCard(recipe)
         })
-    })
+    }) // end this
     .catch( e => {
         console.log('an error has occured')
         console.log(e)
-    }) 
+    }) // end catch 
+    //Remove preloader
+    document.getElementById('preload').remove()
 } // end getProfile
 
 const addToLocalStorage = (key, value) =>{
