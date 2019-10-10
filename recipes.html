@@ -22,14 +22,12 @@
                 <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down ">
                     <li><a class="blue-grey-text text-lighten-4" href="profile.html">Profile</a></li>
-                    <li><a class="blue-grey-text text-lighten-4" href="settings.html">Settings</a></li>
                     <li><a class="blue-grey-text text-lighten-4" href="recipes.html">Recipes</a></li>
                     <li><a id="signOut" class="blue-grey-text text-lighten-4 hide" href="index.html">Sign Out</a></li>
                 </ul>
                 <!-- Navigation for mobile menu-->
                 <ul class="sidenav blue-grey " id="mobile-menu">
                     <li><a class="blue-grey-text text-lighten-4" href="profile.html">Profile</a></li>
-                    <li><a class="blue-grey-text text-lighten-4" href="settings.html">Settings</a></li>
                     <li><a class="blue-grey-text text-lighten-4" href="recipes.html">Recipes</a></li>
                     <li><a id="signOutm" class="blue-grey-text text-lighten-4 hide" href="index.html">Sign Out</a></li>
                 </ul>
@@ -56,24 +54,11 @@
             </div>
             <!-- Fetch Button-->
             <div id="fetchRecipe" class="row">
-                <button id="fetchRecipes" class="waves-effect waves-red blue-grey darken btn">Fetch Recipe</button>
-            </div>
-
-            <!-- Recipe Organizer -->
-            <div class="row">
-                <div class="col s12">
-                    <ul class="tabs">
-                        <li class="tab col s3"><a id="allResults" class="active">ALL</a></li>
-                        <li class="tab col s3"><a id="yesMake">MAKE NOW</a></li>
-                        <li class="tab col s3"><a id="noMake">SOME GROCERY</a></li>               
-                    </ul>
-                </div>
+                <button id="fetchRecipes" class="waves-effect waves-red blue-grey darken btn">Search Recipes</button>
             </div>
             
-            <!-- Tab Content-->
+            <!-- Search Results-->
             <div id="allRecipes" class=""></div><!-- all search results -->
-            <div id="makeNow" class="hide"><!-- search results based on checked ingredients--></div>
-            <div id="makeLater" class="hide"><!-- search results based on checked ingredients--></div>
             
         </div>
 
@@ -85,12 +70,6 @@
                 // Initialize side nav feature
                 const sideNameElem = document.querySelectorAll('.sidenav')
                 M.Sidenav.init(sideNameElem, {edge:'right'})
-
-                // Initialize tabs feature
-                const tabElems = document.querySelectorAll('.tabs')
-                M.Tabs.init(tabElems, {
-                    //swipeable: true
-                });
             });
         </script>
         <!-- Sweet Alert-->
@@ -103,6 +82,5 @@
         <!-- JS to fetch recipes -->
         <script src="./assets/js/firebaseInit.js"></script>
         <script src="./assets/js/fetchRecipes.js"></script>
-        <script src="./assets/js/tabs.js"></script>
     </body>
 </html>

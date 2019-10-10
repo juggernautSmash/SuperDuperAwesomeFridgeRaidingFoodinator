@@ -1,4 +1,4 @@
-console.log('firebaseInit.js is linked')
+//console.log('firebaseInit.js is linked')
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
