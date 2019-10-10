@@ -1,18 +1,15 @@
-.fade {
-  background-color: black;
-  opacity: 0.70 !important; 
-  color: white;
-}
-/* comment */
+
 .background {
   background-image: url(../../assets/images/refrigerator.png);
   background-position: center;
   background-repeat: no-repeat;
   height: 812px; 
   margin: 0 auto;
-  /* opacity: 0.6; */
 }
 
+#loginButtons {
+  margin-bottom: 0px
+}
 #welcome, #intro {
   max-width: 812px;
   color: #cfd8dc;

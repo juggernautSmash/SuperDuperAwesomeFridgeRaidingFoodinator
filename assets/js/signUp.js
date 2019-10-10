@@ -51,6 +51,9 @@ document.getElementById('reg').addEventListener('click', e => {
                 myRecipes: [],
                 allergies: []
             })
+        }).then(redirect =>{
+          const profileURL = "profile.html"
+          window.location.replace(profileURL)
         })
         .catch(e => {
             console.log('an error has occured from signOut.js')
