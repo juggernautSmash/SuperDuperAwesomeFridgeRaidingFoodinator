@@ -47,39 +47,38 @@
         <h4 id='intro'>The app that helps you get recipes based on what ingredients you have.</h4>
       </div>
     </div> -->
-    <div class="row center">
-      <form action="/action_page.php" id="logInForm">
-        <div class="row">
-          <div class="input-field col s6">
-            <input placeholder="Enter Email" id="email" type="text" class="validate">
-            <label for="email">Email</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6 ">
-            <input placeholder="Enter Password" id="pass" type="password" class="validate">
-            <label for="password">Password</label>
+    <div class="row">
+      <form action="/action_page.php">
+        <div class="row" id= "columnBackground">
+          <div class="input-field col s4"></div>
+          <div class="input-field col s4" id="loginField">
+            <input placeholder="Enter Email" id="email" type="text" class="validate" style="color: white">
+            <label for="email"></label>
+            <input placeholder="Enter Password" id="pass" type="password" class="validate" style="color: white">
+            <label for="password"></label>
             <div class="">
               <label>
-                <input id="showPass" name="showPassword" class="with-gap" type="checkbox" />
-                <span>Show Password</span>
+                <input id="showPass" name="showPassword" class="with-gap" type="checkbox"/>
+                <span style="color: white">Show Password</span>
               </label>
             </div>
           </div>
-          <div class="row">
-            <div class="col s6 center">
-              <button type="submit" id="login" class="waves-effect waves-red blue-grey darken btn">Login</button>
-              <button onclick="location.href ='./signUp.html';" type="submit" id="signUp"
-                class="waves-effect waves-red blue-grey darken btn">Sign Up</button>
-            </div>
-          </div>
+        </div>
+        <!-- password field -->
+
+            <div class="row">
+              <div class="col s12 center">
+                <button type="submit" id="login" class="waves-effect waves-red blue-grey darken btn">Login</button>
+                <button onclick="location.href ='./signUp.html';" type="submit" id="signUp"
+                  class="waves-effect waves-red blue-grey darken btn">Sign Up</button>
+              </div>
+        </div>
       </form>
     </div>
-  </div>
-  <div class='row'>
-    <!-- Firebase Auth Info -->
-    <div id="firebaseui-auth-container"></div>
-  </div>
+    <div class='row'>
+      <!-- Firebase Auth Info -->
+      <div id="firebaseui-auth-container"></div>
+    </div>
   </div>
 
   <!-- Footer stuff goes here -->

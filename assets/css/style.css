@@ -1,9 +1,4 @@
-.fade {
-  background-color: black;
-  opacity: 0.70 !important; 
-  color: white;
-}
-/* comment */
+
 .background {
   background-image: url(../../assets/images/refrigerator.png);
   background-position: center;
@@ -11,6 +6,21 @@
   height: 812px; 
   margin: 0 auto;
   /* opacity: 0.6; */
+}
+
+#columnBackground div:nth-child(2) {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+#columnBackground{
+  margin-top: 0px;
+margin-bottom: 0px
+}
+
+#loginField {
+  width: 100%;
+  max-width: fit-content;
+  margin-bottom: 0px
 }
 
 #welcome, #intro {
