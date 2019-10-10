@@ -1,4 +1,4 @@
-console.log('fetchRecipes.js is linked')
+//console.log('fetchRecipes.js is linked')
 let email = localStorage.getItem('email')
 
 let userIngredients = []

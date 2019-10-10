@@ -1,7 +1,7 @@
-console.log('profile.js is linked')
-console.log('getting email info in localStorae')
+//console.log('profile.js is linked')
+//console.log('getting email info in localStorae')
 let email = localStorage.getItem('email')
-console.log(`email is ${email}`)
+//console.log(`email is ${email}`)
 //let userIngredients = []
 
 const generateMyRecipeCard = ({id, title, img, url}) => {//Generate recipe card on the DOM based on selected FETCH 
@@ -10,32 +10,30 @@ const generateMyRecipeCard = ({id, title, img, url}) => {//Generate recipe card 
     recipeCard.id = id
     recipeCard.className = 'row'
     recipeCard.innerHTML = `
-    <div class="row">
-    <div class="col s12 m6">
-        <div class="card">
-            <div class="card-image">
-                <a href='${url}' target='_blank'>
-                <img src="${img}">
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-image">
+                    <a href='${url}' target='_blank'>
+                    <img src="${img}">
+                    </a>
+                <!-- <span class="card-title recipe-title">${title}</span> -->
+                <a class="btn-floating halfway-fab waves-effect waves-light activator red">
+                    <i class="material-icons">clear</i>
                 </a>
-            <!-- <span class="card-title recipe-title">${title}</span> -->
-            <a class="btn-floating halfway-fab waves-effect waves-light activator red">
-                <i class="material-icons">clear</i>
-            </a>
-            </div>
-            <div class="card-content blue-grey darken-4">
-                <a href='${url}' target='_blank'>
-                    <p class="recipe-title">${title}</p>
-                </a>
-            </div>
-            <div class="card-reveal blue-grey darken-4 ">
-                <span class="card-title grey-text text-lighten-4">Remove Recipe?
-                    <i class="material-icons right">close</i>
-                </span>
-                <button class="waves-effect waves-light red btn deleteRecipe" data-id=${id}>YES</button>
+                </div>
+                <div class="card-content blue-grey darken-4">
+                    <a href='${url}' target='_blank'>
+                        <p class="recipe-title">${title}</p>
+                    </a>
+                </div>
+                <div class="card-reveal blue-grey darken-4 ">
+                    <span class="card-title grey-text text-lighten-4">Remove Recipe?
+                        <i class="material-icons right">close</i>
+                    </span>
+                    <button class="waves-effect waves-light red btn deleteRecipe" data-id=${id}>YES</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
     `
     document.getElementById('myRecipes').append(recipeCard)
 } // end generateMyRecipeCard
@@ -121,9 +119,9 @@ const addToLocalStorage = (key, value) =>{
                 break;
             default:
                 console.log(`${key} is unhandled`)
-        }// end switch 
+        } // end switch 
     } // end else
-}//end addToLocalStorage
+} //end addToLocalStorage
 
 const removeFromLocalStorage = (key, value) => {
     console.log(`running removeFromLocalStorage`)
@@ -144,7 +142,7 @@ const removeFromLocalStorage = (key, value) => {
         default:
             console.log(`The key is ${key}`)
     }
-} 
+} //end removeFromLocalStorage
 
 document.getElementById('addItem').addEventListener('click', e => {// Add button action
     console.log(`add button is pressed`)
@@ -157,17 +155,16 @@ document.getElementById('addItem').addEventListener('click', e => {// Add button
         swal("Please input an ingredient")
     } else if(JSON.parse(localStorage.getItem('myFood')).indexOf(ingredient) >= 0 ){//if ingredient is already in the list
         swal(`${ingredient} is already in your list`)
-    } else{// if ingredient is not in the list
+    } else{ // if ingredient is not in the list
         //userIngredients.push(ingredient)
         addIngredientToDOM(ingredient)
 
         // add food ingredient to localStorage
         addToLocalStorage('myFood', ingredient)
-    }// end else if
+    } // end else if
 
     // Clear the text field
     document.getElementById('foodItem').value = ''
-
 })//end ADD button action
 
 document.addEventListener('click', ({target}) => {
@@ -186,12 +183,7 @@ document.addEventListener('click', ({target}) => {
             removeFromLocalStorage('myRecipes', target.dataset.id)
             break;
     }
-        
-
-
-})// end event listener
-
-
+}) // end event listener
 
 //wait 5 seconds before getProfile
 setTimeout( getProfile, 5000)

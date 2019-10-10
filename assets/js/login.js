@@ -1,4 +1,4 @@
-console.log('login.js is linked')
+//console.log('login.js is linked')
 
 // Get elements
 const emailIn = document.getElementById('email')

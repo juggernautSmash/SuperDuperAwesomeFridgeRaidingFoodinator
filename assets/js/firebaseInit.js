@@ -1,4 +1,4 @@
-console.log('firebaseInit.js is linked')
+//console.log('firebaseInit.js is linked')
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -76,9 +76,9 @@ auth.onAuthStateChanged(user => {
         document.getElementById('signOutm').classList += 'hide'
 
         //Remove email from local storage
-        // localStorage.removeItem('email')
-        // localStorage.removeItem('myFood')
-        // localStorage.removeItem('myRecipes')
+        localStorage.removeItem('email')
+        localStorage.removeItem('myFood')
+        localStorage.removeItem('myRecipes')
     }
 })
 
